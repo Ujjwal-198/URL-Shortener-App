@@ -7,10 +7,10 @@ const BASE_URL = process.env.BACKEND_URL || 'http://localhost:8080';
 export const handleCreateUrl = async (req, res) => {
   const { longUrl } = req.body;
   try {
-    if (!longUrl) {
+    if (!longUrl || !validator.isURL(longUrl, { require_protocol: true })) {
       return res.status(400).json({
         success: false,
-        error: { code: 'VALIDATION_ERROR', message: 'Invalid input' },
+        error: { code: 'VALIDATION_ERROR', message: 'Invalid URL format. Please include http:// or https://.' },
       });
     }
 
