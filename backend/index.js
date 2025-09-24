@@ -36,6 +36,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: "Internal Server Error" });
 });
 
+app.get('/', (req, res) => {
+  res.send('Welcome to URL Shortener API');
+});
 
 app.listen(port, () => {
   console.log(`Server started at port ${port} : http://localhost:${port}`);
