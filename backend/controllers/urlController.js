@@ -1,5 +1,6 @@
 import { Url } from '../models/urlModel.js';
 import { nanoid } from 'nanoid';
+import validator from 'validator';
 
 const BASE_URL = process.env.BACKEND_URL || 'http://localhost:8080';
 
@@ -7,7 +8,7 @@ const BASE_URL = process.env.BACKEND_URL || 'http://localhost:8080';
 export const handleCreateUrl = async (req, res) => {
   const { longUrl } = req.body;
   try {
-    if (!longUrl) {
+    if (!longUrl || !validator.isURL(longUrl, { require_protocol: true })) {
       return res.status(400).json({
         success: false,
         error: { code: 'VALIDATION_ERROR', message: 'Invalid URL.' },
