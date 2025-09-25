@@ -11,9 +11,18 @@ const Input = () => {
   const [longUrl, setLongUrl] = useState('');
 
   const handleSubmit = async (e) => {
+
+    function normalizeUrl(url) {
+      if (!/^https?:\/\//i.test(url)) {
+        return 'https://' + url;
+      }
+      return url;
+    }
+
     e.preventDefault();
+    const normalizedUrl = normalizeUrl(longUrl);
     try {
-      const result = await dispatch(handleCreateUrl({ longUrl })).unwrap();
+      const result = await dispatch(handleCreateUrl({ longUrl: normalizedUrl })).unwrap();
       navigate('/output');
       // console.log('handleCreateUrl result:', result);
       setLongUrl(''); // Clear input on success
