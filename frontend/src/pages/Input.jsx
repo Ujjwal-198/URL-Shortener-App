@@ -4,13 +4,6 @@ import { Button } from '../components';
 import { handleCreateUrl } from '../features/urlSlice.js';
 import { useNavigate } from 'react-router-dom';
 
-function normalizeUrl(url) {
-  if (!/^https?:\/\//i.test(url)) {
-    return 'https://' + url;
-  }
-  return url;
-}
-
 const Input = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,9 +12,8 @@ const Input = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const normalizedUrl = normalizeUrl(longUrl);
     try {
-      const result = await dispatch(handleCreateUrl({ longUrl: normalizedUrl })).unwrap();
+      const result = await dispatch(handleCreateUrl({ longUrl })).unwrap();
       navigate('/output');
       // console.log('handleCreateUrl result:', result);
       setLongUrl(''); // Clear input on success
