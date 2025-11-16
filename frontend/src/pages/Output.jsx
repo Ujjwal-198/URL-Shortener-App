@@ -19,7 +19,7 @@ const Output = () => {
             <div className="w-full max-w-lg bg-gray-900 text-white rounded-lg shadow-lg p-8 py-15 space-y-3">
 
                 <p className='text-xl font-semibold mb-5'>Your shortened URL is Ready!</p>
-                <p className='text-sm font-light'>Click of shortened URL below to open in new tab</p>
+                <p className='text-sm font-light'>Click the shortened URL below to open in new tab</p>
                 <div className='flex space-x-2'>
                     <input
                         value={data?.ShortId || ''}
