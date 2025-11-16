@@ -7,7 +7,7 @@ import { handleLogout } from "../features/userSlice.js";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-   
+
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,16 +20,15 @@ const Header = () => {
     } catch (err) {
       console.error('Logout failed:', err);
     } finally {
-      navigate('/'); 
+      navigate('/');
     }
   };
 
   const navLinkClasses = ({ isActive }) =>
-  `hover:text-white relative after:transition-all after:duration-300 ${
-    isActive
+    `hover:text-white relative after:transition-all after:duration-300 ${isActive
       ? "text-blue-400 font-semibold after:block after:h-0.5 after:bg-blue-400 after:w-full after:absolute after:-bottom-1"
       : "text-gray-300 after:w-0"
-  }`;
+    }`;
 
 
 
@@ -53,9 +52,9 @@ const Header = () => {
 
 
         <div className="flex gap-x-4">
-          {authenticated && <Button onClick={() => navigate('/profile')} className="bg-blue-600 max-w-md hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium hidden md:block">
-            Profile
-          </Button>}
+          <Button onClick={authenticated ? () => navigate('/profile') : () => navigate('/signup')} className="bg-blue-600 max-w-md hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium hidden md:block">
+            {authenticated ? 'Profile' : 'Register'}
+          </Button>
           <Button onClick={authenticated ? handleLogoutClick : () => navigate('/login')} className="bg-blue-600 max-w-md hover:bg-blue-700 px-4 py-2 rounded-lg text-sm font-medium hidden md:block">
             {authenticated ? 'Logout' : 'Login'}
           </Button>
